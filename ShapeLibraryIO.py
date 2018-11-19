@@ -227,7 +227,7 @@ class ShapeLibraryWriter(object):
         subwriter.write_int32(entry.width)
         subwriter.write_int32(entry.height)
         subwriter.write_i18n_text(entry.i18n_name)
-        subwriter.write_int32(entry.getShapeCount())
+        subwriter.write_int32(entry.number_of_descendants)
         self.__write_shape(subwriter, entry.shape)
         subwriter.flush()
         contents = g.getvalue()

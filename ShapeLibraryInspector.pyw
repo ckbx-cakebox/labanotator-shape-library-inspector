@@ -222,7 +222,7 @@ class ShapeLibraryInspector(PropertyInspector):
     
     def __add_shape_node(self, parentNode, shape):
         node = self.treeview.insert(parentNode, Tk.END, text=shape.name, values=('Shape<%s>' % shape.type, ''))
-        for key in sorted(shape.getProperties().keys()):
+        for key in shape:
             if key == 'ChildShapes':
                 if len(shape.children) > 0:
                     subnode = self.treeview.insert(node, Tk.END, text='ChildShapes', values=('[Shape]', ''))

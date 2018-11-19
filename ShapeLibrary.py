@@ -57,21 +57,21 @@ class ShapeLibraryEntry(object):
     def name(self):
         return self.__name
     
-    @property
-    def width(self):
-        return self.__width
-    
-    @property
-    def height(self):
-        return self.__height
-    
     @name.setter
     def name(self, value):
         self.__name = name
     
+    @property
+    def width(self):
+        return self.__width
+    
     @width.setter
     def width(self, value):
         self.__width = value
+    
+    @property
+    def height(self):
+        return self.__height
     
     @height.setter
     def height(self, value):
@@ -89,28 +89,22 @@ class ShapeLibraryEntry(object):
     def shape(self):
         return self.__shape
     
-    def getShapeCount(self, shape=None):
-        if shape is None:
-            return self.getShapeCount(self.__shape)
-        return 1 + sum(self.getShapeCount(subshape) for subshape in shape.children)
+    @property
+    def number_of_descendants(self):
+        return self.__number_of_descendants(self.__shape)
+    
+    def __number_of_descendants(self, shape):
+        return 1 + sum(self.__number_of_descendants(subshape) for subshape in shape.children)
     
     def __str__(self):
-        return '"%s" (%dx%d %s) %s' % (self.__name, self.__width, self.__height, self.__localizedName, self.__shape)
+        return '"%s" (%dx%d %s) %s' % (self.__name, self.__width, self.__height, self.__i18n_name, self.__shape)
 
 class Shape(object):
     def __init__(self):
         self.__properties = {}
     
-    def setProperty(self, name, value):
-        self.__properties[name] = value
-    
-    def getProperties(self):
-        return self.__properties
-    
-    def getProperty(self, name, defaultvalue=None):
-        if name in self.__properties:
-            return self.__properties[name]
-        return defaultvalue
+    def __iter__(self):
+        return iter(sorted(self.__properties.keys()))
     
     def __getitem__(self, name):
         if name in self.__properties:
@@ -123,19 +117,19 @@ class Shape(object):
     
     @property
     def type(self):
-        return self.getProperty('ShapeType', '')
+        return '' if self['ShapeType'] is None else self['ShapeType']
     
     @property
     def name(self):
-        return self.getProperty('ShapeName', '')
+        return '' if self['ShapeName'] is None else self['ShapeName']
     
     @property
     def points(self):
-        return self.getProperty('Points', [])
+        return [] if self['Points'] is None else self['Points']
     
     @property
     def children(self):
-        return self.getProperty('ChildShapes', [])
+        return [] if self['ChildShapes'] is None else self['ChildShapes']
     
     def __str__(self):
         return '%s' % self.__properties
