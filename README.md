@@ -6,11 +6,15 @@ This script can edit these *.lib files directly. It implements the following fea
 
 ## Features
 
-- shape tree inspection
-- direct property edit
-- multilingual property edit (if the properties are defined as i18n text)
+- Shape Library Inspector (ShapeLibraryInspector.pyw)
+  - shape tree inspection
+  - direct property edit
+  - multilingual property edit (if the properties are defined as i18n text)
+- Shape Library Editor (ShapeLibraryEditor.pyw)
+  - change shape list order
+  - copy shapes from other shape library file
 
-Warning: *editing might be unsafe* (it may occur some unfamiliar error messages, or unstable behaviors of the application).
+Warning: *editing with the inspector might be unsafe* (it may occur some unfamiliar error messages, or unstable behaviors of the application).
 
 Some properties are marked as "reserved"; those functionalities are unknown.
 
