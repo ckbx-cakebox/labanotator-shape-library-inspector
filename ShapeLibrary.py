@@ -46,11 +46,11 @@ class ShapeLibrary(object):
         return "\n\n".join("%s" % entry for entry in self.__entries)
 
 class ShapeLibraryEntry(object):
-    def __init__(self, name, width, height, localizedName, shape):
+    def __init__(self, name, width, height, i18n_name, shape):
         self.__name = name
         self.__width = width
         self.__height = height
-        self.__localizedName = localizedName
+        self.__i18n_name = i18n_name
         self.__shape = shape
     
     @property
@@ -79,7 +79,11 @@ class ShapeLibraryEntry(object):
     
     @property
     def i18n_name(self):
-        return self.__localizedName
+        return self.__i18n_name
+    
+    @i18n_name.setter
+    def i18n_name(self, value):
+        self.__i18n_name = value
     
     @property
     def shape(self):

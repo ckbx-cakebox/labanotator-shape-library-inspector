@@ -236,7 +236,7 @@ class ShapeLibraryWriter(object):
     
     def __write_shape(self, writer, shape):
         writer.write(shape.type.ljust(16).encode('iso-8859-1'))
-        writer.write_i18n_text(shape['_Reserved01'])
+        writer.write(shape['_Reserved01'])
         writer.write_int32(shape['ShapeAutoNumber'])
         writer.write_int32(shape['ShapeRef'])
         writer.write(shape['_Reserved02'])
@@ -253,9 +253,9 @@ class ShapeLibraryWriter(object):
         writer.write_float32(shape['_Reserved05'])
         writer.write_float32(shape['_Reserved06'])
         writer.write(shape['_Reserved07'])
-        writer.write_float32(shape['rotation'])
+        writer.write_float32(shape['Rotation'])
         writer.write(shape['_Reserved08'])
-        writer.write_color_rgb(shape['fillColor'])
+        writer.write_color_rgb(shape['FillColor'])
         writer.write(shape['_Reserved10'])
         writer.write_pascal32(shape.name.encode('iso-8859-1'))
         writer.write(shape['_Reserved12'])

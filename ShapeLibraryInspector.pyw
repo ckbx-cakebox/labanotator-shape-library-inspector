@@ -187,6 +187,8 @@ class ShapeLibraryInspector(PropertyInspector):
             sl = property.target
             if name == 'ReadOnly':
                 sl.readonly = value
+            elif name == 'Name':
+                sl.name = value
         elif isinstance(property.target, ShapeLibraryEntry):
             entry = property.target
             if name == 'Name':
@@ -196,7 +198,7 @@ class ShapeLibraryInspector(PropertyInspector):
             elif name == 'Height':
                 entry.height = value
             elif name == 'I18nName':
-                pass
+                entry.i18n_name = value
         elif isinstance(property.target, Shape):
             property.target[name] = value
     
